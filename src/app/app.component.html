@@ -14,13 +14,13 @@
       <nav class="navbar-sidebar">
         <ul class="list-unstyled navbar-list">
           <li>
-            <a href="#">Electric Guitars</a>
+            <a routerLink="/category/1" routerLinkActive="active-link">Electric Guitars</a>
           </li>
           <li>
-            <a href="#">Acoustic Guitars</a>
+            <a routerLink="/category/2" routerLinkActive="active-link">Acoustic Guitars</a>
           </li>
           <li>
-            <a href="#">Classical Guitars</a>
+            <a routerLink="/category/3" routerLinkActive="active-link">Classical Guitars</a>
           </li>
         </ul>
       </nav>
@@ -58,7 +58,8 @@
     <!-- END HEADER DESKTOP-->
 
     <!-- MAIN CONTENT-->
-    <app-product-list></app-product-list>
+    
+    <router-outlet></router-outlet>
   </div>
 </div>
 
