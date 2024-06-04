@@ -819,6 +819,9 @@ footer ul li{
     .container{
         max-width:1320px
     }
+    .text-nowrap-sm {
+        white-space: nowrap;
+      }
 }
 
 @media (min-width:992px) and (max-width:1199px){
@@ -829,6 +832,9 @@ footer ul li{
         color:#205b8d;
         margin-left:15px
     }
+    .text-nowrap-sm {
+        white-space: nowrap;
+      }
     .header-mobile .header-mobile-bar{
         padding:10px 0;
         background:#fff
@@ -843,6 +849,9 @@ footer ul li{
      .section-content-p30{
         padding:0
     }
+    .text-nowrap-sm {
+        white-space: nowrap;
+      }
     .page-container{
         position:relative;
         top:88px;
@@ -938,6 +947,9 @@ footer ul li{
       .au-input-xl{
         min-width:150px
     }
+    .text-nowrap-sm {
+        white-space: nowrap;
+      }
     .header-button-item{
         font-size:22px;
         margin-right:15px
@@ -1038,6 +1050,11 @@ footer ul li{
         background:#fff;
         border:0;
         padding:8px 0
+    }
+    @media (max-width: 576px) {
+        .text-nowrap-sm {
+          white-space: nowrap;
+        }
     }
 }
 
