@@ -17,7 +17,7 @@
             <div class="price">
               {{ tempProduct.unitPrice | currency : "EUR" }}
             </div>
-            <a href="#" class="primary-btn">Add to cart</a>
+            <button  (click)="addToCart(tempProduct)"class="btn btn-primary btn-sm">Add to cart</button>
           </div>
         </div>
 
@@ -34,37 +34,42 @@
       <!-- footer-->
       <div class="footer-pagination">
         <div class="row">
-            <div class="col-md-6"></div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-9" style="padding-left: 20%;">
-
-                        <ngb-pagination 
-                        [collectionSize]="theTotalElements"
-                        [(page)]="thePageNumber"
-                        [pageSize]="thePageSize"
-                        [maxSize]="5"
-                        [boundaryLinks]="true"
-                        (pageChange)="listProducts()">
-
-                        </ngb-pagination>
-                    </div>
-                    <div class="col-md-3 mt-2 inline-container" style="text-align:right;" >
-                        <span class="mr-2 p-2 text-nowrap-sm d-inline">Page Size</span>
-                        <select #myPageSelect (change)="updatePageSize(myPageSelect.value)" class="d-inline">
-                            <!--<option value="true"></option>-->
-                            <option>8</option>
-                            <option>12</option>
-                            <option>16</option>
-                            <option>20</option>
-                            <option>50</option>
-                        </select>
-                    </div>
-                </div>
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-9" style="padding-left: 20%">
+                <ngb-pagination
+                  [collectionSize]="theTotalElements"
+                  [(page)]="thePageNumber"
+                  [pageSize]="thePageSize"
+                  [maxSize]="5"
+                  [boundaryLinks]="true"
+                  (pageChange)="listProducts()"
+                >
+                </ngb-pagination>
+              </div>
+              <div
+                class="col-md-3 mt-2 inline-container"
+                style="text-align: right"
+              >
+                <span class="mr-2 p-2 text-nowrap-sm d-inline">Page Size</span>
+                <select
+                  #myPageSelect
+                  (change)="updatePageSize(myPageSelect.value)"
+                  class="d-inline"
+                >
+                  <!--<option value="true"></option>-->
+                  <option>8</option>
+                  <option>12</option>
+                  <option>16</option>
+                  <option>20</option>
+                  <option>50</option>
+                </select>
+              </div>
             </div>
+          </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
