@@ -4,7 +4,7 @@
       <li *ngFor="let tempProductCategory of productCategories">
         <a
           routerLink="/category/{{ tempProductCategory.id }}"
-          routerLinkActive="active-link"
+          routerLinkActive="active-link" class="text-decoration-none fs-6"
           >{{ tempProductCategory.categoryName }}</a
         >
       </li>
