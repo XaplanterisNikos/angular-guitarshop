@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupName } from '@angular/forms';
 import { Luv2ShopFormService } from '../../services/luv2-shop-form.service';
+import { Country } from '../../common/country';
+import { State } from '../../common/state';
 
 @Component({
   selector: 'app-checkout',
@@ -15,6 +17,11 @@ export class CheckoutComponent implements OnInit {
 
   creditCardYears: number[] = [];
   creditCardMonths: number[] =[];
+
+  countries: Country[] = [];
+
+  shippingAddressStates: State[] = [];
+  billingaddressStates: State[] =[];
 
   constructor(private formBuilder: FormBuilder,
                     private luv2ShopFormService: Luv2ShopFormService ) {}
@@ -59,7 +66,7 @@ export class CheckoutComponent implements OnInit {
           console.log("Credit card months: "+ JSON.stringify(data));
           this.creditCardMonths = data;
         }
-      )
+      );
 
       // credit card years
       this.luv2ShopFormService.getCreditCardYears().subscribe(
@@ -67,7 +74,15 @@ export class CheckoutComponent implements OnInit {
           console.log("Credit card years: "+ JSON.stringify(data));
           this.creditCardYears = data;
         }
-      )
+      );
+
+      // countries
+      this.luv2ShopFormService.getCountries().subscribe(
+        data =>{
+            console.log("Countries: "+ JSON.stringify(data));
+            this.countries = data;
+        }
+      );
   }
 
   onSubmit() {
@@ -83,12 +98,16 @@ export class CheckoutComponent implements OnInit {
       if (shippingAddress && billingAddress) {
         billingAddress.setValue(shippingAddress.value);
       }
+      this.billingaddressStates = this.shippingAddressStates;
+
     } else {
-      // You might want to clear the billing address if the checkbox is unchecked
+      // clear the billing address if the checkbox is unchecked
       const billingAddress = this.checkoutFormGroup.get('billingAddress');
       if (billingAddress) {
         billingAddress.reset();
       }
+
+      this.billingaddressStates = [];
     }
   }
 
@@ -114,6 +133,32 @@ export class CheckoutComponent implements OnInit {
       }
     )
 
+  }
+
+  getStates(formGroupName: string){
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
+
+    if(formGroup !== null){
+
+    
+    const countryCode = formGroup.value.country.code;
+    const countryName = formGroup.value.country.name;
+
+    console.log(`${formGroupName} country code: ${countryCode}`);
+    console.log(`${formGroupName} country name: ${countryName}`);
+
+    this.luv2ShopFormService.getStates(countryCode).subscribe(
+      data => {
+        if(formGroupName === 'shippingAddress'){
+            this.shippingAddressStates = data;
+        }else{
+          this.billingaddressStates = data;
+        }
+
+        formGroup.get('state')!.setValue(data[0]);
+      }
+    );
+  }
   }
   
 }
