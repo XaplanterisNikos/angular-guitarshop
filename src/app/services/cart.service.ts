@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../common/cart-item';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
+  /** Array to hold cart items */
   cartItems: CartItem[] =[];
 
-  totalPrice: Subject<number> = new Subject<number>();
-  totalQuantity: Subject<number> = new Subject<number>();
+/** Subject to publish total price changes */
+  totalPrice: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  /** Subject to publish total quantity changes */
+  totalQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor() { }
 
+  /**
+   * Adds an item to the cart.
+   * @param {CartItem} theCartItem - The cart item to be added.
+   */
   addToCart(theCartItem: CartItem){
 
     // already have the item in our cart
@@ -41,6 +48,10 @@ export class CartService {
     this.computeCartTotals();
   }
 
+  /**
+   * Decrements the quantity of a cart item.
+   * @param {CartItem} theCartItem - The cart item to decrement.
+   */
   decrementQuantity(theCartItem: CartItem){
     theCartItem.quantity--;
 
@@ -50,6 +61,11 @@ export class CartService {
       this.computeCartTotals();
     }
   }
+
+  /**
+   * Removes a cart item from the cart.
+   * @param {CartItem} theCartItem - The cart item to remove.
+   */
   remove(theCartItem: CartItem) {
     // get index
     const itemIndex = this.cartItems.findIndex(
@@ -62,6 +78,9 @@ export class CartService {
     }
   }
 
+  /**
+   * Computes the total price and total quantity of items in the cart.
+   */
   computeCartTotals() {
     let totalPriceValue: number = 0;
     let totalQuantityValue: number = 0;
@@ -78,6 +97,12 @@ export class CartService {
     // log cart data
     this.logCartData(totalPriceValue,totalQuantityValue);
   }
+
+  /**
+   * Logs cart data to the console.
+   * @param {number} totalPriceValue - The total price of items in the cart.
+   * @param {number} totalQuantityValue - The total quantity of items in the cart.
+   */
   logCartData(totalPriceValue: number, totalQuantityValue: number) {
     console.log('Contents of the Cart');
     for(let tempCartItem of this.cartItems){

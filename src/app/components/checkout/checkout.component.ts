@@ -4,30 +4,81 @@ import { Luv2ShopFormService } from '../../services/luv2-shop-form.service';
 import { Country } from '../../common/country';
 import { State } from '../../common/state';
 import { Luv2ShopValidators } from '../../validators/luv2-shop-validators';
+import { CartService } from '../../services/cart.service';
 
+/**
+ * Component responsible for managing the checkout process.
+ */
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
 })
 export class CheckoutComponent implements OnInit {
+  /**
+   * The form group for the checkout form.
+   * @type {FormGroup}
+   */
   checkoutFormGroup!: FormGroup;
 
+  /**
+   * The total price of items in the cart.
+   * @type {number}
+   */
   totalPrice: number =0;
+
+  /**
+   * The total quantity of items in the cart.
+   * @type {number}
+   */
   totalQuantity: number=0;
 
+  /**
+   * Array of credit card years.
+   * @type {number[]}
+   */
   creditCardYears: number[] = [];
+
+  /**
+   * Array of credit card months.
+   * @type {number[]}
+   */
   creditCardMonths: number[] =[];
 
+  /**
+   * Array of countries.
+   * @type {Country[]}
+   */
   countries: Country[] = [];
 
+  /**
+   * Array of states for shipping address.
+   * @type {State[]}
+   */
   shippingAddressStates: State[] = [];
+
+  /**
+   * Array of states for billing address.
+   * @type {State[]}
+   */
   billingaddressStates: State[] =[];
 
+  /**
+ * Creates an instance of CheckoutComponent.
+ * @param {FormBuilder} formBuilder - The form builder service.
+ * @param {Luv2ShopFormService} luv2ShopFormService - The service for managing form operations.
+ * @param {CartService} cartService - The service for managing cart operations.
+ */
   constructor(private formBuilder: FormBuilder,
-                    private luv2ShopFormService: Luv2ShopFormService ) {}
+                    private luv2ShopFormService: Luv2ShopFormService, 
+                    private cartService:CartService) {}
 
+
+  // Methods, getters, and event handlers
   ngOnInit(): void {
+    this.reviewCartDetails();
+
+     // Initialize the form group - Validators
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('',[Validators.required,Validators.minLength(2),Luv2ShopValidators.notOnlyWhitespace]),
@@ -97,6 +148,20 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  // Review Your Order Details
+  reviewCartDetails(){
+
+      // totalQuantity
+      this.cartService.totalQuantity.subscribe(
+        totalQuantity => this.totalQuantity = totalQuantity
+      );
+      // totalPrice
+      this.cartService.totalPrice.subscribe(
+        totalPrice => this.totalPrice = totalPrice
+      );
+  }
+
+// Getters for form controls
   get firstName(){return this.checkoutFormGroup.get('customer.firstName');}
   get lastName(){return this.checkoutFormGroup.get('customer.lastName');}
   get email(){return this.checkoutFormGroup.get('customer.email');}
@@ -119,7 +184,7 @@ export class CheckoutComponent implements OnInit {
   get creditCardSecurityCode(){return this.checkoutFormGroup.get('creditCard.securityCode');}
 
 
-
+// Copy shipping address to billing address
   copyShippingAddressToBillingAddress(event: Event): void {
     const target = event.target as HTMLInputElement;
     if (target.checked) {
@@ -141,6 +206,7 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+// Handle credit card months and years
   handleMonthsAndYears(){
     const creditCardFormGroup = this.checkoutFormGroup.get('creitCard');
 
@@ -165,6 +231,7 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+  // Get states based on country selection
   getStates(formGroupName: string){
     const formGroup = this.checkoutFormGroup.get(formGroupName);
 
