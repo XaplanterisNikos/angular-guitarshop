@@ -523,6 +523,21 @@ input.au-input.au-input-xl{
  * ----------------------------
  */
 
+ .app-logo{
+    padding: 70px;
+ }
+
+ .app-login{
+    
+    height: 150px;
+    padding: 10px;
+    color: white;
+    text-align: center;
+ }
+ .app-title{
+    font-size: 1.5em;
+ }
+
 .product-box img {
     width: 150px;
 }

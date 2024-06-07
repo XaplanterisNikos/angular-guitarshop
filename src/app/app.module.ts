@@ -16,8 +16,16 @@ import { CartStatusComponent } from './components/cart-status/cart-status.compon
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { AuthContentComponent } from './components/auth-content/auth-content.component';
+import { WelcomeContentComponent } from './components/welcome-content/welcome-content.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { ContentComponent } from './components/content/content.component';
+import { ButtonComponent } from './components/button/button.component';
 
 const routes: Routes = [
+  
+  { path: 'login',component: LoginComponent},
   { path: 'checkout', component: CheckoutComponent },
   { path: 'cart-details', component: CartDetailsComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
@@ -39,6 +47,12 @@ const routes: Routes = [
     CartStatusComponent,
     CartDetailsComponent,
     CheckoutComponent,
+    LoginComponent,
+    AuthContentComponent,
+    WelcomeContentComponent,
+    LoginFormComponent,
+    ContentComponent,
+    ButtonComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
