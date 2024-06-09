@@ -11,7 +11,7 @@ import { State } from '../common/state';
 @Injectable({
   providedIn: 'root'// Configures Angular to provide this service at the root level
 })
-export class Luv2ShopFormService {
+export class GuitarFormService {
 
   /** URL to fetch countries data from the backend API. */
   private countriesUrl = 'http://localhost:8080/api/countries';
@@ -20,7 +20,7 @@ export class Luv2ShopFormService {
   private statesUrl = 'http://localhost:8080/api/states';
 
   /**
-   * Constructs a new Luv2ShopFormService.
+   * Constructs a new GuitarFormService.
    * @param httpClient The Angular HttpClient for making HTTP requests.
    */
   constructor(private httpClient: HttpClient) {

@@ -1,9 +1,9 @@
 import { FormControl, ValidationErrors } from "@angular/forms";
 
 /**
- * A collection of custom validators for form controls used in the Luv2Shop application.
+ * A collection of custom validators for form controls used in the GuitarShop application.
  */
-export class Luv2ShopValidators {
+export class GuitarShopValidators {
 
      /**
      * Validator that checks if the input contains only whitespace.
