@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { GuitarFormService } from './guitar-form.service';
 
-describe('Luv2ShopFormService', () => {
+describe('GuitarShopFormService', () => {
   let service: GuitarFormService;
 
   beforeEach(() => {

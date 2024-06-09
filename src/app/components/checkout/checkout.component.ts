@@ -78,7 +78,7 @@ export class CheckoutComponent implements OnInit {
   /**
    * Creates an instance of CheckoutComponent.
    * @param {FormBuilder} formBuilder - The FormBuilder service for creating reactive forms.
-   * @param {Luv2ShopFormService} luv2ShopFormService - The service for managing form operations.
+   * @param {GuitarShopFormService} GuitarFormService - The service for managing form operations.
    * @param {CartService} cartService - The service for managing cart operations.
    * @param {CheckoutService} checkoutService - The service for handling checkout operations.
    * @param {Router} router - The Angular router service for navigation.
