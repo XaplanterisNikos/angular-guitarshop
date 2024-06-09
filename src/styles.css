@@ -1,7 +1,5 @@
 /* 
- * ----------------------------
- * Common CSS
- * ----------------------------
+ * Common
  */
 
  *{
@@ -128,9 +126,7 @@ aside.menu-sidebar.d-none.d-lg-block.clr{
 }
 
 /* 
- * ----------------------------
  * Header Desktop Section
- * ----------------------------
  */
 
 .header-desktop{
@@ -308,9 +304,7 @@ input.au-input.au-input-xl{
 }
 
 /* 
- * ----------------------------
  * Left Menu Bar
- * ----------------------------
  */
 
 .menu-sidebar{
@@ -382,9 +376,7 @@ input.au-input.au-input-xl{
 }
 
 /* 
- * ----------------------------
  * Header Mobile Section
- * ----------------------------
  */
 
 .header-mobile{
@@ -518,9 +510,7 @@ input.au-input.au-input-xl{
 }
 
 /* 
- * ----------------------------
  * Products List
- * ----------------------------
  */
 
  .app-logo{
@@ -575,9 +565,7 @@ input.au-input.au-input-xl{
 }
 
 /* 
- * ----------------------------
  * Shopping Cart Checkout
- * ----------------------------
  */
 
 .form-area{
@@ -689,9 +677,7 @@ select{
 }
 
 /* 
- * ----------------------------
  * Shopping Cart Details
- * ----------------------------
  */
 
 .table{
@@ -724,9 +710,7 @@ table.table.table-bordered th{
 }
 
 /* 
- * ----------------------------
  * Product Details
- * ----------------------------
  */
 
  .price{
@@ -745,9 +729,7 @@ table.table.table-bordered th{
 /**/
 
 /* 
- * ----------------------------
  * Buttons
- * ----------------------------
  */
 
  .btn-info{
@@ -775,9 +757,7 @@ a.primary-btn:hover{
 }
 
 /* 
- * ----------------------------
  * Footer section
- * ----------------------------
  */
 
 footer ul li a{
@@ -800,9 +780,7 @@ footer ul li{
 }
 
 /* 
- * ----------------------------
  * Media Queries
- * ----------------------------
  */
 
 @media (max-width:1600px){

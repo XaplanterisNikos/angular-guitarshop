@@ -14,10 +14,19 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) {}
 
+  /**
+   * Example method to fetch a numeric value from the API.
+   * @returns {Observable<number>} An observable containing the example value.
+   */
   getExampleValue(): Observable<number> {
     return this.httpClient.get<number>('/orders');
   }
 
+  /**
+   * Fetches a specific product by its ID from the API.
+   * @param {number} theProductId - The ID of the product to fetch.
+   * @returns {Observable<Product>} An observable containing the product.
+   */
   getProduct(theProductId: number): Observable<Product> {
     // build URL for product id
     const productUrl = `${this.baseUrl}/${theProductId}`;
@@ -42,12 +51,23 @@ export class ProductService {
     return this.httpClient.get<GetResponseProducts>(searchUrl);
   }
 
+  /**
+   * Fetches a list of products based on category ID.
+   * @param {number} theCategoryId - The category ID.
+   * @returns {Observable<Product[]>} An observable containing the list of products.
+   */
   getProductList(theCategoryId: number): Observable<Product[]> {
     //  build URL based on category id
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
     return this.getProducts(searchUrl);
   }
 
+
+  /**
+   * Searches for products based on a keyword.
+   * @param {string} theKeyword - The keyword to search for.
+   * @returns {Observable<Product[]>} An observable containing the list of products matching the keyword.
+   */
   searchProducts(theKeyword: string): Observable<Product[]> {
     //  build URL based on keyword
     const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`;
@@ -55,6 +75,13 @@ export class ProductService {
     return this.getProducts(searchUrl);
   }
 
+  /**
+   * Searches for products based on a keyword with pagination.
+   * @param {number} thePage - The page number.
+   * @param {number} thePageSize - The page size.
+   * @param {string} theKeyword - The keyword to search for.
+   * @returns {Observable<GetResponseProducts>} An observable containing the paginated list of products matching the keyword.
+   */
   searchProductsPaginate(
     thePage: number,
     thePageSize: number,
@@ -73,6 +100,10 @@ export class ProductService {
       .pipe(map((response) => response._embedded.products));
   }
 
+  /**
+   * Fetches the list of product categories from the API.
+   * @returns {Observable<ProductCategory[]>} An observable containing the list of product categories.
+   */
   getProductCategories(): Observable<ProductCategory[]> {
     return this.httpClient
       .get<GetResponseProductCategory>(this.categoryUrl)
@@ -97,6 +128,9 @@ interface GetResponseProducts {
   };
 }
 
+/**
+ * Interface for the product category API response.
+ */
 interface GetResponseProductCategory {
   _embedded: {
     productCategory: ProductCategory[];
