@@ -14,6 +14,10 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) {}
 
+  getExampleValue(): Observable<number> {
+    return this.httpClient.get<number>('/orders');
+  }
+
   getProduct(theProductId: number): Observable<Product> {
     // build URL for product id
     const productUrl = `${this.baseUrl}/${theProductId}`;
@@ -74,6 +78,8 @@ export class ProductService {
       .get<GetResponseProductCategory>(this.categoryUrl)
       .pipe(map((response) => response._embedded.productCategory));
   }
+
+  
 }
 
 /**

@@ -15,7 +15,21 @@ export class CartService {
   /** Subject to publish total quantity changes */
   totalQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor() { }
+  //storage:Storage = sessionStorage;
+  storage:Storage = localStorage;
+
+  constructor() { 
+
+    // read data from storage
+    let data = JSON.parse(this.storage.getItem('cartItems')!);
+
+      if(data != null){
+        this.cartItems = data;
+      }
+
+      // compute totals based on the data that is read from storage
+      this.computeCartTotals();
+  }
 
   /**
    * Adds an item to the cart.
@@ -96,7 +110,15 @@ export class CartService {
 
     // log cart data
     this.logCartData(totalPriceValue,totalQuantityValue);
+
+    // persist cart data
+    this.persistCartItems();
   }
+
+  persistCartItems(){
+    this.storage.setItem('cartItems',JSON.stringify(this.cartItems));
+  }
+
 
   /**
    * Logs cart data to the console.

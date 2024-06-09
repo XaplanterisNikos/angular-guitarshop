@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AxiosService } from '../../services/axios.service';
 
+
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -10,7 +11,14 @@ export class ContentComponent {
 
   componentToShow: string = "welcome";
 
-  constructor(private axiosService : AxiosService){}
+  
+
+  constructor(private axiosService : AxiosService,
+				){}
+
+  ngOnit():void{
+	
+  }
 
   showComponent(componentToShow: string): void {
     this.componentToShow = componentToShow;
@@ -25,7 +33,7 @@ export class ContentComponent {
         }).then(
 		    response => {
 		        this.axiosService.setAuthToken(response.data.token);
-		        this.componentToShow = "messages";
+		        this.componentToShow = "orders";
 		    }).catch(
 		    error => {
 		        this.axiosService.setAuthToken(null);
@@ -47,7 +55,7 @@ export class ContentComponent {
         .then(
 		    response => {
 		        this.axiosService.setAuthToken(response.data.token);
-		        this.componentToShow = "messages";
+		        this.componentToShow = "orders";
 		    }).catch(
 		    error => {
 		        this.axiosService.setAuthToken(null);
